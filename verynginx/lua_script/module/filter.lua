@@ -11,7 +11,21 @@ local request_tester = require "request_tester"
 
 
 function _M.filter()
-    
+
+    --[[ local tcpsock, err = ngx.req.socket(true)
+    ngx.log(ngx.NOTICE, "Init read body: ", err)
+
+    if tcpsock then
+        tcpsock:settimeout(1000)  -- one second timeout
+        local line, err, partial = tcpsock:receiveany(100)
+        ngx.log(ngx.NOTICE, "Read body: ", line)
+        if line then
+            if string.find(line, "bash") then
+                ngx.exit(403)
+            end
+        end
+    end]]
+
     if VeryNginxConfig.configs["filter_enable"] ~= true then
         return
     end
